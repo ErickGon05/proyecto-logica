@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Bool solver</title>
+</head>
+<body>
+    <div id="component-wrapper">
+        <section id="prems-section-wrapper" class="section-wrappers">
+            <div id="prem-lable-container" class="component-lable-wrapper"><p></p></div>
+            <div class="component-containers">
+                <div id="prem-component-container"></div>
+                <div id="con-component-container"><input type="text" class="container-input" placeholder="conclusion"></div>
+            </div>
+            <div id="prems-section-buttons" class="section-buttons-wrapper">
+                <div id="left-button-wrapper" class="button-wrapper">
+                    <button id="prem-add-button" class="prem-mod-btn">agregar premisa</button>
+                    <button id="prem-remove-button" class="prem-mod-btn">eliminar premisa</button>
+                </div>
+                <div id="right-button-wrapper" class="button-wrapper">
+                    <button id="args-upload">evaluar</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <button id="test-btn">print values</button>
+    <script src="script.js"></script>
+</body>
+</html>

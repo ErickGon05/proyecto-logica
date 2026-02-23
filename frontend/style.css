@@ -1,0 +1,112 @@
+body{
+    margin: 0px;
+    background: linear-gradient(45deg, #3b3e41, #ffffff);
+    height: 90vh;
+}
+
+#component-wrapper{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 80vh;
+    margin-top: 10vh;
+    justify-content: center;
+}
+
+prem-container{
+    display: flex;
+    justify-content: center;
+}
+
+.container-input{
+    font-size: 7vh;
+    border: none;
+    width: 100%;
+    background: none;
+    outline: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    margin: 2px;
+    width: 80%;
+}
+
+#con-component-container{
+    display: flex;
+    justify-content: center;
+}
+
+.section-wrappers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    border-radius: 1vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
+    overflow: hidden;
+}
+
+.component-containers{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: white;
+}
+
+#prem-component-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.component-lable-wrapper{
+   background: #53cda4;
+   width: 100%; 
+   display: flex;
+   justify-content: center;
+}
+
+.section-buttons-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 8%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #23c58f;
+}
+
+.button-wrapper{
+    display: flex;
+    width: 50%;
+}
+
+#right-button-wrapper{
+    justify-content: end;
+}
+
+#args-upload{
+    margin-right: 1vw;
+    width: fit-content;
+    border-radius: 1vw;
+    background: #5148c0;
+    font-size: 5vh;
+    color: white;
+    border: none;
+    margin-top: .2vh;
+    margin-bottom: .2vh;
+}
+
+.prem-mod-btn{
+    margin-left: .7vw;
+    border-radius: 1vw;
+    background: #53cda4;
+    border: none;
+}

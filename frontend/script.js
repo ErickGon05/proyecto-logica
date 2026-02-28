@@ -49,9 +49,9 @@ async function argSend(){
                 return;
             }
         };
-        argStr.length == 0 ? argStr += `${v} ` : argStr += `,${v} `;
+        argStr.length == 0 ? argStr += `${v}` : argStr += `, ${v}`;
     };
-    if(aborted) return;
+    if(aborted || argStr.length == 0) return;
     
     fetch('/eval', {
         method: 'POST',

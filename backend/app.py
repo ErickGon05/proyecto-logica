@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 import tokenizer
+import shunting_yard
 import os
 
 app = Flask(__name__,
@@ -33,6 +34,11 @@ def recibe():
         #TODO formatear el output en un json para el front
 
     for p in prem_tokens_list:
+        print(p)
+
+    post_fix_list = shunting_yard.shunting_yard(prem_tokens_list)
+
+    for p in post_fix_list:
         print(p)
 
     return jsonify({"status": "ok"}), 200

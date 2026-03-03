@@ -40,6 +40,8 @@ function premContainerRemove(){
 async function argSend(){
     let aborted = false;
     let argStr = "";
+    let conclusion = document.getElementById("conclution-input").value
+    console.log(conclusion)
     for(const x of premArray){
         let v = x.getValue();
         for (const i in v){
@@ -51,6 +53,7 @@ async function argSend(){
         };
         argStr.length == 0 ? argStr += `${v}` : argStr += `, ${v}`;
     };
+    if(conclusion.length == 0) return;
     if(aborted || argStr.length == 0) return;
     
     fetch('/eval', {
@@ -58,7 +61,7 @@ async function argSend(){
         headers: {
             'Content-type': 'application/json'
         },
-        body: JSON.stringify({message: argStr})
+        body: JSON.stringify({premisas: argStr, conclusion: conclusion})
     });
     
    console.log(argStr);

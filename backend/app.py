@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify, send_from_directory
 import tokenizer
 import shunting_yard
 import AST
+import evaluate
+import combination
 import os
 
 app = Flask(__name__,
@@ -16,9 +18,11 @@ def home():
 def recibe():
     data = request.get_json()
 
-    message = data.get("message")
+    premisas = data.get("premisas")
 
-    prem_list = message.split(", ")
+    conclusion = data.get("conclusion")
+
+    prem_list = premisas.split(", ")
 
     print(prem_list)
 
@@ -45,6 +49,10 @@ def recibe():
     ast_list = AST.ast_builder(post_fix_list)
 
     print(ast_list)
+
+    comb_list = combination.comb_generator(var_list)
+
+    prem_ans_list = evaluate.evaluate(ast_list, comb_list, prem_list)
 
     return jsonify({"status": "ok"}), 200
 

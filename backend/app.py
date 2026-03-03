@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, send_from_directory
 import tokenizer
 import shunting_yard
+import AST
 import os
 
 app = Flask(__name__,
@@ -19,27 +20,31 @@ def recibe():
 
     prem_list = message.split(", ")
 
-    print(message)
     print(prem_list)
-
-    for p in prem_list:
-        print(p)
 
     var_list = list()
 
     prem_tokens_list = tokenizer.tokenizer(prem_list, var_list)
 
+    print(var_list)
+
+    print(prem_tokens_list)
+
     if isinstance(prem_tokens_list, str):
         return prem_tokens_list
         #TODO formatear el output en un json para el front
 
-    for p in prem_tokens_list:
-        print(p)
-
     post_fix_list = shunting_yard.shunting_yard(prem_tokens_list)
 
-    for p in post_fix_list:
-        print(p)
+    print(post_fix_list)
+
+    if isinstance(post_fix_list, str):
+        return post_fix_list
+        #TODO formatear el output en un json para el front
+
+    ast_list = AST.ast_builder(post_fix_list)
+
+    print(ast_list)
 
     return jsonify({"status": "ok"}), 200
 

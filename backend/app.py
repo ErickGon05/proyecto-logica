@@ -54,6 +54,8 @@ def recibe():
 
     prem_ans_list = evaluate.evaluate(ast_list, comb_list, prem_list)
 
+    print(conclusion)
+
     return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":

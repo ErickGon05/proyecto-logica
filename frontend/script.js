@@ -37,6 +37,82 @@ function premContainerRemove(){
     premArray.pop();
 }
 
+function deleteTable(){
+    const table = document.getElementById("args-table");
+    table.innerHTML = "";
+}
+
+function createHeader(data){
+
+    const table = document.getElementById("args-table");
+
+    const header = document.createElement("tr");
+
+    for(const primitive of data.variables){
+        const th = document.createElement("th");
+        th.textContent = primitive;
+        header.appendChild(th);
+    }
+
+    for(const premise of data.premisas){
+        const th = document.createElement("th");
+        th.textContent = premise;
+        header.appendChild(th);
+    }
+
+    const th = document.createElement("th");
+    th.textContent = data.conclusion;
+    header.appendChild(th);
+
+    table.appendChild(header);
+}
+
+function createBody(data){
+
+    const table = document.getElementById("args-table");
+
+    let row_num = data.ans_list.length;
+
+    for(let i = 0; i < row_num; i++){
+        const tr = document.createElement("tr");
+
+        const comb = data.combination_list[i];
+
+        for(const v of data.variables){
+            const td = document.createElement("td");
+            td.textContent = comb[v] ? "V" : "F";
+            tr.appendChild(td);
+        }
+
+        const ans = data.ans_list[i];
+
+        for(val of ans){
+            const td = document.createElement("td");
+            td.textContent = val ? "V" : "F";
+            tr.appendChild(td);
+        }
+
+        if(data.critic_index_list.includes(i)){
+            tr.classList.add("critic_row");
+        }
+
+        if(data.invalid_index_list.includes(i)){
+            tr.classList.add("invalid_row");
+        }
+
+        table.appendChild(tr);
+    }
+}
+
+function makeTable(data){
+   let row_num = data.ans_list.length;
+   for(let i = 0; i < row_num; i++){
+    console.log(data.ans_list[i])
+   }
+   createHeader(data);
+   createBody(data);
+}
+
 async function argSend(){
     let aborted = false;
     let argStr = "";
@@ -53,6 +129,7 @@ async function argSend(){
         };
         argStr.length == 0 ? argStr += `${v}` : argStr += `, ${v}`;
     };
+
     if(conclusion.length == 0) return;
     if(aborted || argStr.length == 0) return;
     
@@ -67,26 +144,25 @@ async function argSend(){
    const data = await resp.json();
 
    console.log(data);
-}
 
-function printValues(){
-    let values = []
-    premArray.forEach((x)=>{
-        values.push(x.getValue())
-    });
-    console.log(values)
+   if(data.error){
+        window.alert(data.message);
+        return;
+    }
+
+   deleteTable();
+
+   makeTable(data);
 }
 
 function main(){
     let addBtn = document.querySelector('#prem-add-button');
     let rmvBtn = document.querySelector('#prem-remove-button');
     let sndBtn = document.querySelector('#args-upload');
-    let test = document.querySelector('#test-btn')
 
     addBtn.addEventListener('click', premContainerAdd);
     rmvBtn.addEventListener('click', premContainerRemove);
     sndBtn.addEventListener('click', argSend);
-    test.addEventListener('click', printValues);
 }
 
 window.addEventListener('load', main);

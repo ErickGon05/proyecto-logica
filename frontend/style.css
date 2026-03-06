@@ -1,6 +1,6 @@
 body{
     margin: 0px;
-    background: linear-gradient(45deg, #3b3e41, #ffffff);
+    background: linear-gradient(45deg, #000000, #7e7a7a);
     height: 90vh;
 }
 
@@ -109,4 +109,38 @@ prem-container{
     border-radius: 1vw;
     background: #53cda4;
     border: none;
+}
+
+#table-container-wrapper{
+    width: 65vw;
+    background: rgb(255, 255, 255);
+    border-radius: 1vw;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#args-table{
+    width: max-content;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+#args-table th, #args-table td{
+    min-width: 10vw;
+    height: 10vh;
+
+    text-align: center;
+    vertical-align: middle;
+
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.critic_row{
+    background: rgb(223, 223, 122);
+}
+
+.invalid_row{
+    background: rgb(247, 69, 69);
 }

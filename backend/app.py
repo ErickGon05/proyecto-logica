@@ -5,11 +5,8 @@ import AST
 import evaluate
 import combination
 import critic
-import os
 
-app = Flask(__name__,
-            static_folder="../frontend",
-            static_url_path="")
+app = Flask(__name__,static_folder="../frontend",static_url_path="")
 
 @app.route("/")
 def home():
@@ -25,53 +22,22 @@ def recibe():
 
     prem_list = premisas.split(", ")
 
-    print(prem_list)
-
-    print(conclusion)
-
     var_list = list()
 
-    prem_tokens_list = tokenizer.tokenizer(prem_list, var_list)
+    tokens_list = tokenizer.tokenizer(prem_list + [conclusion], var_list)
 
-    conc_tokens_list = tokenizer.tokenizer([conclusion], var_list)
+    if isinstance(tokens_list, str):
+        return jsonify({"error": True, "message": tokens_list})
 
-    print(var_list)
+    postfix_list = shunting_yard.shunting_yard(tokens_list)
 
-    print(prem_tokens_list)
+    if isinstance(postfix_list, str):
+        return jsonify({"error": True, "message": postfix_list})
 
-    if isinstance(prem_tokens_list, str):
-        return prem_tokens_list
-        #TODO formatear el output en un json para el front
-
-    if isinstance(conc_tokens_list, str):
-        return conc_tokens_list
-        #TODO formatear el output en un json para el front
-
-    prem_postfix_list = shunting_yard.shunting_yard(prem_tokens_list)
-
-    conc_postfix_list = shunting_yard.shunting_yard(conc_tokens_list)
-
-    print(prem_postfix_list)
-
-    if isinstance(prem_postfix_list, str):
-        return prem_postfix_list
-        #TODO formatear el output en un json para el front
-
-    if isinstance(conc_postfix_list, str):
-        return conc_postfix_list
-        #TODO formatear el output en un json para el front
-
-    print(f"prem: {prem_postfix_list} conc: {conc_postfix_list}")
-
-    print(prem_postfix_list + conc_postfix_list)
-
-    ast_list = AST.ast_builder(prem_postfix_list + conc_postfix_list)
-
-    print(ast_list)
+    ast_list = AST.ast_builder(postfix_list)
 
     if isinstance(ast_list, str):
-        return ast_list
-        #TODO formatear el output en un json para el front
+        return jsonify({"error": True, "message": ast_list})
 
     comb_list = combination.comb_generator(var_list)
 
@@ -96,7 +62,8 @@ def recibe():
         "combination_list": comb_list,
         "ans_list": ans_list,
         "critic_index_list": critic_index_list,
-        "invalid_index_list": invalid_index_list
+        "invalid_index_list": invalid_index_list,
+        "message": "ok"
     }
 
     return jsonify(ans), 200

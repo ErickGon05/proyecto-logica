@@ -117,11 +117,13 @@ prem-container{
     border-radius: 1vw;
     overflow-y: auto;
     overflow-x: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 #args-table{
     width: max-content;
-    height: 100%;
+    height: 95%;
     border-collapse: collapse;
     table-layout: fixed;
 }
@@ -143,4 +145,17 @@ prem-container{
 
 .invalid_row{
     background: rgb(247, 69, 69);
+}
+
+#status-wrapper{
+    height: 5vh;
+    background-color: #23c58f;
+}
+
+#status-wrapper{
+    align-content: center;
+}
+
+#status{
+    margin: 0;
 }

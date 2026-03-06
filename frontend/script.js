@@ -111,6 +111,14 @@ function makeTable(data){
    }
    createHeader(data);
    createBody(data);
+   const status = document.getElementById("status");
+   if(data.invalid){
+    status.textContent = "proposicion invalida";
+    status.style.color = "red"
+   }else{
+    status.textContent = "proposicion valida";
+    status.style.color = "green"
+   }
 }
 
 async function argSend(){

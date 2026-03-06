@@ -31,6 +31,10 @@ def recibe():
 
     postfix_list = shunting_yard.shunting_yard(tokens_list)
 
+    print(postfix_list)
+
+    print(" ".join(map(str, postfix_list[0])))
+
     if isinstance(postfix_list, str):
         return jsonify({"error": True, "message": postfix_list})
 

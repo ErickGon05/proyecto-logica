@@ -27,7 +27,7 @@ def shunting_yard(token_lists):
 
             elif token.type in PRECEDENCE:
                 while (
-                    op_stack and op_stack[-1] in PRECEDENCE and 
+                    op_stack and op_stack[-1].type in PRECEDENCE and 
                     (
                     PRECEDENCE[op_stack[-1].type] > PRECEDENCE[token.type] or 
                     (
@@ -50,7 +50,7 @@ def shunting_yard(token_lists):
                 op_stack.pop()
         
         while op_stack:
-            if op_stack[-1] in (TokenType.LPAR, TokenType.RPAR):
+            if op_stack[-1].type in (TokenType.LPAR, TokenType.RPAR):
                 return "Error: parentesis desbalanceado"
             output.append(op_stack.pop())
         

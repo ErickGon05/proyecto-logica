@@ -56,7 +56,7 @@ async function argSend(){
     if(conclusion.length == 0) return;
     if(aborted || argStr.length == 0) return;
     
-    fetch('/eval', {
+    const resp = await fetch('/eval', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
@@ -64,7 +64,9 @@ async function argSend(){
         body: JSON.stringify({premisas: argStr, conclusion: conclusion})
     });
     
-   console.log(argStr);
+   const data = await resp.json();
+
+   console.log(data);
 }
 
 function printValues(){

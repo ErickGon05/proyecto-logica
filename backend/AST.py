@@ -13,9 +13,9 @@ class ASTNode:
 
 def ast_builder(post_tokens):
     stack_list = []
-    stack = []
 
     for t_list in post_tokens:
+        stack = []
         for token in t_list:
             token: Token
 

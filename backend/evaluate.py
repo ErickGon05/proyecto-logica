@@ -23,7 +23,7 @@ def evaluate_ast(node: ASTNode, val_dict: dict):
     if node.token.type == TokenType.DIMP:
         return left == right
 
-def evaluate(ast_list:list, comb_list: list, prem_list: list):
+def evaluate(ast_list:list, comb_list: list, prem_list: list, conc):
     prem_ans_list = []
     for dictionary in comb_list:
         row = []
@@ -33,5 +33,5 @@ def evaluate(ast_list:list, comb_list: list, prem_list: list):
         prem_ans_list.append(row)
 
     for i in range(len(comb_list)):
-        print(f"{prem_list}, {comb_list[i]}: {prem_ans_list[i]}")
+        print(f"premisas: {prem_list} conclusion: {conc}, {comb_list[i]}: {prem_ans_list[i]}")
     return prem_ans_list

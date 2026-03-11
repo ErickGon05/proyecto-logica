@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +7,33 @@
     <title>Bool solver</title>
 </head>
 <body>
+    <p id="instruct">Ingresa premisas y una conclusión para generar su tabla de verdad.</p>
     <div id="component-wrapper">
         <section id="prems-section-wrapper" class="section-wrappers">
             <div id="prem-lable-container" class="component-lable-wrapper"><p></p></div>
             <div class="component-containers">
                 <div id="prem-component-container"></div>
-                <div id="con-component-container"><input type="text" class="container-input" placeholder="conclusion" id="conclution-input"></div>
+                <div id="con-component-container">
+                    <input type="text" class="container-input" placeholder="conclusión" id="conclution-input">
+                </div>
             </div>
             <div id="prems-section-buttons" class="section-buttons-wrapper">
                 <div id="left-button-wrapper" class="button-wrapper">
-                    <button id="prem-add-button" class="prem-mod-btn">agregar premisa</button>
-                    <button id="prem-remove-button" class="prem-mod-btn">eliminar premisa</button>
+                    <button id="prem-add-button" class="prem-mod-btn">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                        Agregar
+                    </button>
+                    <button id="prem-remove-button" class="prem-mod-btn">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+                        Eliminar
+                    </button>
                 </div>
                 <div id="right-button-wrapper" class="button-wrapper">
-                    <button id="args-upload">evaluar</button>
+                    <button id="help-button" class="prem-mod-btn btn-help" onclick="document.getElementById('help-modal').classList.add('open')">?</button>
+                    <button id="args-upload">
+                        Evaluar
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
                 </div>
             </div>
         </section>
@@ -32,6 +45,58 @@
             </table>
         </div>
     </div>
+    <!-- Guía de símbolos -->
+    <div id="help-modal" onclick="if(event.target===this)this.classList.remove('open')">
+        <div id="help-modal-box">
+            <div id="help-modal-header">
+                <span id="help-modal-title">Guía de símbolos</span>
+                <button id="help-modal-close" onclick="document.getElementById('help-modal').classList.remove('open')">✕</button>
+            </div>
+            <div id="help-symbols-grid">
+                <div class="help-symbol-row">
+                    <span class="sym-token">-</span>
+                    <span class="sym-name">Negación</span>
+                    <span class="sym-logic">¬ p</span>
+                    <span class="sym-example">-p</span>
+                </div>
+                <div class="help-symbol-row">
+                    <span class="sym-token">&amp;</span>
+                    <span class="sym-name">Conjunción</span>
+                    <span class="sym-logic">p ∧ q</span>
+                    <span class="sym-example">p &amp; q</span>
+                </div>
+                <div class="help-symbol-row">
+                    <span class="sym-token">|</span>
+                    <span class="sym-name">Disyunción</span>
+                    <span class="sym-logic">p ∨ q</span>
+                    <span class="sym-example">p | q</span>
+                </div>
+                <div class="help-symbol-row">
+                    <span class="sym-token">&gt;</span>
+                    <span class="sym-name">Condicional</span>
+                    <span class="sym-logic">p → q</span>
+                    <span class="sym-example">p &gt; q</span>
+                </div>
+                <div class="help-symbol-row">
+                    <span class="sym-token">&lt;&gt;</span>
+                    <span class="sym-name">Bicondicional</span>
+                    <span class="sym-logic">p ↔ q</span>
+                    <span class="sym-example">p &lt;&gt; q</span>
+                </div>
+                <div class="help-symbol-row">
+                    <span class="sym-token">( )</span>
+                    <span class="sym-name">Agrupación</span>
+                    <span class="sym-logic">—</span>
+                    <span class="sym-example">(p &amp; q) &gt; r</span>
+                </div>
+            </div>
+            <div id="help-example-block">
+                <span id="help-example-label">Ejemplo completo</span>
+                <code id="help-example-code">Premisa 1: p &gt; q &nbsp;&nbsp; Premisa 2: p &nbsp;&nbsp; Conclusión: q</code>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

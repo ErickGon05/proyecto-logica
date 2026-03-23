@@ -54,9 +54,15 @@ function createHeader(data){
         header.appendChild(th);
     }
 
-    for(const premise of data.premisas){
+    for(let i = 0; i < data.premisas.length; i++){
+        let realIndex = data.variables.length + i;
+
+        if(data.atomic_index.includes(realIndex)){
+            continue;
+        }
+
         const th = document.createElement("th");
-        th.textContent = premise;
+        th.textContent = data.premisas[i];
         header.appendChild(th);
     }
 
@@ -74,6 +80,7 @@ function createBody(data){
     let row_num = data.ans_list.length;
 
     for(let i = 0; i < row_num; i++){
+        // logica para saltar rl indice si se encuentra en atomic_index
         const tr = document.createElement("tr");
 
         const comb = data.combination_list[i];
@@ -86,9 +93,15 @@ function createBody(data){
 
         const ans = data.ans_list[i];
 
-        for(val of ans){
+        for(let j = 0; j < ans.length; j++){
+            let realIndex = data.variables.length + j;
+
+            if(data.atomic_index.includes(realIndex)){
+                continue;
+            }
+
             const td = document.createElement("td");
-            td.textContent = val ? "V" : "F";
+            td.textContent = ans[j] ? "V" : "F";
             tr.appendChild(td);
         }
 

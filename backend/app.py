@@ -5,6 +5,7 @@ import AST
 import evaluate
 import combination
 import critic
+import var_finder
 
 app = Flask(__name__,static_folder="../frontend",static_url_path="")
 
@@ -31,8 +32,6 @@ def recibe():
 
     postfix_list = shunting_yard.shunting_yard(tokens_list)
 
-    print(postfix_list)
-
     print(" ".join(map(str, postfix_list[0])))
 
     if isinstance(postfix_list, str):
@@ -53,9 +52,13 @@ def recibe():
 
     invalid_index_list = critic.invalid_ident(critic_index_list, ans_list)
 
-    invalid = len(invalid_index_list) != 0
+    invalid = len(invalid_index_list) != 0 or len(critic_index_list) == 0
 
-    print('renglones invalidos: ',invalid_index_list)
+    atomic_index = []
+
+    for i in range(len(prem_list)):
+        if prem_list[i].strip() in var_list:
+            atomic_index.append(i + len(var_list))
 
     ans = {
         "error": False,
@@ -67,6 +70,7 @@ def recibe():
         "ans_list": ans_list,
         "critic_index_list": critic_index_list,
         "invalid_index_list": invalid_index_list,
+        "atomic_index": atomic_index,
         "message": "ok"
     }
 
